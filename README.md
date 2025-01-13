@@ -1,5 +1,3 @@
-# redis-hawk-monitoring
-
 # Redis Hawk Monitoring
 
 **Version :** 2.0  
