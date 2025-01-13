@@ -1,103 +1,102 @@
 # Redis Hawk Monitoring
 
-**Version :** 2.0  
-**Auteur :** Aubin MIENANZAMBI  
-**Licence :** GPLv2 ou supérieure
+**Version:** 2.0  
+**Author:** Aubin MIENANZAMBI  
+**License:** GPLv2 or later
 
 ---
 
 ## Description
 
-**Redis Hawk Monitoring** est un plugin WordPress avancé conçu pour surveiller et gérer efficacement votre cache Redis. Grâce à une interface intuitive et complète, ce plugin vous offre une vue d'ensemble en temps réel des performances de votre serveur Redis, vous permettant ainsi d'optimiser l'utilisation du cache et de maintenir la santé globale de votre environnement WordPress.
+**Redis Hawk Monitoring** is an advanced WordPress plugin designed to efficiently monitor and manage your Redis cache. With an intuitive and comprehensive interface, this plugin provides you with a real-time overview of your Redis server's performance, allowing you to optimize cache usage and maintain the overall health of your WordPress environment.
 
-### Fonctionnalités principales :
+### Key Features:
 
-- **Tableau de bord en temps réel :** Visualisez les statistiques clés de Redis, telles que l'utilisation de la mémoire, le nombre de connexions clientes, le taux d'éviction des clés, et plus encore.
-- **Gestion du cache :** Videz le cache Redis en un seul clic pour garantir la fraîcheur des données mises en cache.
-- **Alertes configurables :** Recevez des notifications personnalisées en cas d'utilisation excessive de la mémoire ou de connexions simultanées élevées.
-- **Compatibilité multisite :** Gérez efficacement le cache Redis pour plusieurs sites hébergés sur le même serveur en utilisant des préfixes uniques pour chaque site.
-- **Fallback intelligent :** En cas d'indisponibilité de Redis, le plugin bascule automatiquement vers un cache interne non persistant, assurant ainsi la continuité de votre site sans interruption.
-- **Interface utilisateur ergonomique :** Profitez d'une interface claire et facile à naviguer, adaptée tant aux administrateurs novices qu'aux utilisateurs avancés.
+- **Real-Time Dashboard:** Visualize key Redis statistics, such as memory usage, number of client connections, key eviction rates, and more.
+- **Cache Management:** Clear the Redis cache with a single click to ensure the freshness of cached data.
+- **Configurable Alerts:** Receive personalized notifications in case of excessive memory usage or high concurrent connections.
+- **Multisite Compatibility:** Efficiently manage Redis cache for multiple sites hosted on the same server using unique prefixes for each site.
+- **Intelligent Fallback:** In the event of Redis unavailability, the plugin automatically switches to an internal non-persistent cache, ensuring your site remains operational without interruption.
+- **User-Friendly Interface:** Enjoy a clear and easy-to-navigate interface, suitable for both novice administrators and advanced users.
 
 ---
 
 ## Installation
 
-1. **Téléchargement :**
-   - Téléchargez le plugin **Redis Hawk Monitoring** depuis le répertoire officiel des plugins WordPress ou depuis votre espace de développement.
+1. **Download:**
+   - Download the **Redis Hawk Monitoring** plugin from the official WordPress plugin repository or your development space.
 
-2. **Installation via l'admin WordPress :**
-   - Accédez à votre tableau de bord WordPress.
-   - Naviguez vers `Extensions` > `Ajouter`.
-   - Cliquez sur `Téléverser une extension`.
-   - Sélectionnez le fichier ZIP du plugin et cliquez sur `Installer maintenant`.
-   - Une fois l'installation terminée, cliquez sur `Activer l'extension`.
+2. **Install via WordPress Admin:**
+   - Access your WordPress dashboard.
+   - Navigate to `Plugins` > `Add New`.
+   - Click on `Upload Plugin`.
+   - Select the plugin ZIP file and click on `Install Now`.
+   - Once the installation is complete, click on `Activate Plugin`.
 
-3. **Configuration :**
-   - Après activation, accédez au menu `Redis Hawk` dans votre tableau de bord WordPress.
-   - Suivez les instructions pour configurer les paramètres Redis, notamment l'hôte, le port, le préfixe, et la base de données.
+3. **Configuration:**
+   - After activation, access the `Redis Hawk` menu in your WordPress dashboard.
+   - Follow the instructions to configure Redis settings, including host, port, prefix, and database.
 
-4. **Assurez-vous que Redis est installé et opérationnel :**
-   - **Avant d'utiliser Redis Hawk Monitoring, assurez-vous que Redis est déjà installé et fonctionnel sur votre serveur.**
-   - Si Redis rencontre des problèmes, vous pouvez revenir au système de cache par défaut en **supprimant simplement le fichier `object-cache.php`** de votre répertoire `wp-content`.
+4. **Ensure Redis is Installed and Operational:**
+   - **Before using Redis Hawk Monitoring, ensure that Redis is already installed and functioning on your server.**
+   - If Redis encounters issues, you can revert to the default caching system by **simply deleting the `object-cache.php` file** from your `wp-content` directory.
 
 ---
 
 ## Configuration
 
-Pour configurer Redis avec WordPress et Redis Hawk Monitoring, suivez ces étapes :
+To configure Redis with WordPress and Redis Hawk Monitoring, follow these steps:
 
-1. **Modifier le fichier `wp-config.php` :**
-   - Ajoutez les lignes suivantes à votre fichier `wp-config.php` :
+1. **Edit the `wp-config.php` File:**
+   - Add the following lines to your `wp-config.php` file:
      ```php
-     // Active la mise en cache WordPress
+     // Enable WordPress caching
      define('WP_CACHE', true);
      
-     // Configuration Redis
+     // Redis Configuration
      define('WP_REDIS_HOST', '127.0.0.1');
      define('WP_REDIS_PORT', 6379);
-     define('WP_REDIS_PREFIX', 'nomsite_'); // Remplacez 'nomsite_' par un préfixe unique pour chaque site
+     define('WP_REDIS_PREFIX', 'yoursite_'); // Replace 'yoursite_' with a unique prefix for each site
      define('WP_REDIS_DATABASE', 0); 
      ```
-   - **Important :** Remplacez `'nomsite_'` par un préfixe unique correspondant au nom de votre site pour éviter toute confusion, surtout si vous hébergez plusieurs sites sur le même serveur.
+   - **Important:** Replace `'yoursite_'` with a unique prefix corresponding to your site's name to avoid confusion, especially if you are hosting multiple sites on the same server.
 
-2. **Vérifier la présence de `object-cache.php` :**
-   - Assurez-vous que le fichier `object-cache.php` est bien présent dans le répertoire `wp-content`. Ce fichier est essentiel pour que WordPress utilise Redis comme système de cache objet.
+2. **Verify the Presence of `object-cache.php`:**
+   - Ensure that the `object-cache.php` file is present in the `wp-content` directory. This file is essential for WordPress to utilize Redis as the object caching system.
 
-3. **Configurer Redis Hawk Monitoring :**
-   - Accédez au menu `Redis Hawk` dans votre tableau de bord WordPress.
-   - Configurez les paramètres Redis en fonction de votre environnement (hôte, port, préfixe, etc.).
-   - Configurez les alertes selon vos préférences pour être informé des anomalies ou des utilisations excessives des ressources.
+3. **Configure Redis Hawk Monitoring:**
+   - Access the `Redis Hawk` menu in your WordPress dashboard.
+   - Configure the Redis settings according to your environment (host, port, prefix, etc.).
+   - Set up alerts based on your preferences to be notified of any anomalies or excessive resource usage.
 
 ---
 
-## Utilisation
+## Usage
 
-### Tableau de bord Redis Hawk :
+### Redis Hawk Dashboard:
 
-- **Vue d'ensemble :** Accédez au tableau de bord Redis Hawk pour visualiser les statistiques en temps réel de votre serveur Redis.
-- **Statistiques clés :** Observez l'utilisation de la mémoire, les connexions actives, les opérations de cache, et plus encore.
-- **Gestion du cache :** Utilisez le bouton `Vider le cache` pour purger rapidement toutes les données mises en cache dans Redis.
+- **Overview:** Access the Redis Hawk dashboard to view real-time statistics of your Redis server.
+- **Key Statistics:** Monitor memory usage, active connections, cache operations, and more.
+- **Cache Management:** Use the `Clear Cache` button to swiftly purge all cached data in Redis.
 
-### Alertes et notifications :
+### Alerts and Notifications:
 
-- **Configuration des alertes :** Définissez des seuils pour recevoir des notifications en cas d'utilisation excessive de la mémoire ou de connexions simultanées élevées.
-- **Réactivité :** Restez informé des performances de votre cache Redis pour intervenir rapidement en cas de besoin.
+- **Configure Alerts:** Set thresholds to receive notifications when memory usage is excessive or when there are too many concurrent connections.
+- **Proactive Monitoring:** Stay informed about your Redis cache performance to take prompt action when needed.
 
-### Compatibilité multisite :
+### Multisite Compatibility:
 
-- **Préfixes uniques :** Attribuez des préfixes uniques pour chaque site dans un environnement multisite afin d'éviter les conflits de clés dans Redis.
-- **Gestion centralisée :** Surveillez et gérez le cache Redis de tous vos sites depuis une interface centralisée.
+- **Unique Prefixes:** Assign unique prefixes for each site in a multisite environment to prevent key conflicts in Redis.
+- **Centralized Management:** Monitor and manage Redis cache for all your sites from a centralized interface.
 
 ---
 
 ## FAQ
 
-### 1. **Redis Hawk Monitoring peut-il fonctionner sans Redis installé ?**
-Non, le plugin nécessite que Redis soit installé et configuré sur votre serveur pour fonctionner correctement. En cas d'indisponibilité de Redis, le plugin bascule automatiquement vers un cache interne non persistant, mais pour une performance optimale, Redis doit être opérationnel.
+### 1. **Can Redis Hawk Monitoring function without Redis installed?**
+No, the plugin requires Redis to be installed and configured on your server to function correctly. In the event of Redis unavailability, the plugin automatically switches to an internal non-persistent cache, but for optimal performance, Redis must be operational.
 
-### 2. **Comment personnaliser le préfixe Redis pour chaque site dans un environnement multisite ?**
-Lors de la configuration dans `wp-config.php`, définissez un préfixe unique pour chaque site en modifiant la constante `WP_REDIS_PREFIX`. Par exemple :
+### 2. **How can I customize the Redis prefix for each site in a multisite environment?**
+When configuring in `wp-config.php`, define a unique prefix for each site by modifying the `WP_REDIS_PREFIX` constant. For example:
 ```php
-define('WP_REDIS_PREFIX', 'mon_site_');
-
+define('WP_REDIS_PREFIX', 'mysite_');
